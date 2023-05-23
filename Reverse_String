@@ -1,0 +1,55 @@
+"""
+Write a function that reverses a string. The input string is given as an array of characters s.
+
+You must do this by modifying the input array in-place with O(1) extra memory.
+"""
+
+from typing import List
+
+
+
+# Not expected to return anything. Just modify s in-place only.
+class Solution:
+    def reverseString(self, s: List[str]) -> None:
+        
+        # Use two-pointers
+        left = 0
+        right = len(s) - 1
+        
+        # hold an item
+        container = ''
+        
+        while left != right:
+            # Hold the first letter
+            container = s[left]
+            
+            # Put last letter first
+            s[left] = s[right]
+            
+            # Put the first letter at the end
+            s[right] = container
+            
+            # move the pointers closer together -> and <-
+            left += 1
+            right -= 1
+            
+            # if the last two items are next to each other, swap them and list reversal is done
+            if right - left == 1:
+                container = s[left]
+                s[left] = s[right]
+                s[right] = container
+                left = right
+            # if the list has only 2 items, then the list reversal is done
+            elif len(s) == 2:
+                left = right
+        return s
+
+
+# Begin test
+char_list = ["a","b"]
+my_solution = Solution()
+print(my_solution.reverseString(char_list))
+# End test
+            
+        
+        
